@@ -73,7 +73,6 @@
         .nav-logo img {
             height: 80px;
             width: 200px;
-
         }
 
         .nav-logo-text {
@@ -128,14 +127,62 @@
             transform: translateY(-2px);
         }
 
+        /* Hamburger Menu */
         .mobile-menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: var(--white);
+            color: var(--primary-color);
             font-size: 28px;
             cursor: pointer;
             padding: 10px;
+            z-index: 1001;
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                transition: right 0.3s ease;
+                padding: 20px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-link {
+                color: var(--white);
+                width: 100%;
+                text-align: center;
+                font-size: 18px;
+                padding: 15px;
+            }
+
+            .nav-link:hover,
+            .nav-link.active {
+                color: var(--white);
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-link::before {
+                display: none;
+            }
         }
 
         /* Carousel Styles */
@@ -394,7 +441,6 @@
         .feature-icon {
             width: 120px;
             height: 120px;
-
             border: 3px solid var(--accent-color);
             border-radius: 50%;
             display: flex;
@@ -409,7 +455,6 @@
             content: '';
             width: 60px;
             height: 60px;
-
             border-radius: 50%;
             position: absolute;
         }
@@ -559,19 +604,27 @@
         .partner-logos {
             display: flex;
             gap: 20px;
+            /* space between logos */
             align-items: center;
+            justify-content: center;
+            /* center the logos horizontally */
             flex-wrap: wrap;
+            /* wrap on small screens */
+            padding: 20px;
         }
 
-        .partner-logo {
-            background: var(--white);
-            color: var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: var(--shadow-light);
+        .partner-logos img {
+            height: 60px;
+            /* adjust size as needed */
+            object-fit: contain;
+            transition: transform 0.3s ease;
         }
+
+        .partner-logos img:hover {
+            transform: scale(1.05);
+            /* optional hover effect */
+        }
+
 
         .certificate-image {
             width: 100%;
@@ -791,7 +844,6 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-
         }
 
         .contact-icon.phone {
@@ -847,26 +899,6 @@
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0 20px;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 110px;
-                left: 0;
-                width: 100%;
-                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-                box-shadow: var(--shadow-medium);
-                padding: 15px 0;
-            }
-
-            .nav-menu.active {
-                display: flex;
             }
 
             .carousel-slide img {
@@ -968,7 +1000,9 @@
                     <img src="logo.png" alt="HIR Electricals Logo">
                     <div class="nav-logo-text">HIR ELECTRICALS</div>
                 </div>
-                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <ul class="nav-menu" id="navMenu">
                     <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
                     <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
@@ -1035,8 +1069,6 @@
         </div>
 
         <!-- Unique Section -->
-        <!-- Unique Section -->
-        <!-- Unique Section -->
         <div class="unique-section" id="unique">
             <h2 class="unique-title">WHAT MAKES US UNIQUE?</h2>
             <div class="features-grid">
@@ -1066,6 +1098,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Vision Mission Section - Image Right, Content Left -->
         <div class="vision-mission-section" id="vision">
             <div class="vision-mission-content">
@@ -1162,31 +1195,6 @@
                                 <img src="logos/philips.jpg" alt="PHILIPS Logo">
                                 <img src="logos/Ecolink.png" alt="ECOLINK Logo">
                             </div>
-                            <style>
-                                .partner-logos {
-                                    display: flex;
-                                    gap: 20px;
-                                    /* space between logos */
-                                    align-items: center;
-                                    justify-content: center;
-                                    /* center the logos horizontally */
-                                    flex-wrap: wrap;
-                                    /* wrap on small screens */
-                                    padding: 20px;
-                                }
-
-                                .partner-logos img {
-                                    height: 60px;
-                                    /* adjust size as needed */
-                                    object-fit: contain;
-                                    transition: transform 0.3s ease;
-                                }
-
-                                .partner-logos img:hover {
-                                    transform: scale(1.05);
-                                    /* optional hover effect */
-                                }
-                            </style>
                         </div>
                         <div class="certificate-image">
                             <img src="cert.png" alt="Authorization Certificate">
@@ -1268,7 +1276,7 @@
                     <img src="logos/legrand.png" alt="ANCHOR">
                 </div>
                 <div class="brand-item">
-                    <img src="logos/anchor.svg ">
+                    <img src="logos/anchor.svg">
                 </div>
                 <div class="brand-item">
                     <img src="logos/finolex.png" alt="FINOLEX">
@@ -1354,6 +1362,33 @@
     </div>
 
     <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            // Toggle between hamburger and close icon
+            const icon = mobileMenuToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
         // Carousel functionality
         let currentSlideIndex = 0;
         const slides = document.querySelectorAll('.carousel-slide');
@@ -1462,12 +1497,6 @@
         setInterval(() => {
             changeAccreditation(1);
         }, 8000);
-
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-        }
 
         // Navigation functionality
         document.addEventListener('DOMContentLoaded', () => {
